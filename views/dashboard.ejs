@@ -1,0 +1,9 @@
+<%-include('header')-%>
+<div class="mainContainer container-fluid">
+<div class="dashBoard">
+    <h1>Welcome to dashBoard</h1>
+    <p><%= locals.user ? user : 'user' %></p>
+    <a href="/route/logout">logout</a>
+</div>
+</div>
+<%-include('footer')-%>

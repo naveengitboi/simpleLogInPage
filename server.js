@@ -1,19 +1,39 @@
-const express = require('express')
-const { dirname } = require('path')
-const path = require('path')
-const app = express()
+const express = require("express");
+const path = require("path");
+const session = require("express-session");
+const {v4: uuidv4} = require('uuid')
+const router = require('./router')
 
-const port = process.env.PORT || 3000
+const port = process.env.PORT || 3000;
+
+const app = express();
+
+//middle ware
+const bodyparser = require('body-parser');
+app.use(bodyparser.json())
+app.use(bodyparser.urlencoded({
+    extended: true
+}))
+
+
 
 // html content
-app.set('view engine', 'ejs')
-
+app.set("view engine", "ejs");
 
 // static asserts
-const pathName = path.join(__dirname, 'public')
+const pathName = path.join(__dirname, "public");
+app.use("/static", express.static(pathName));
 
-app.use('/static', express.static(pathName))
+app.use(session(
+    {
+        secret: uuidv4(),
+        resave:false,
+        saveUninitialized: true
+    }
+))
+app.use('/route', router)
 //home route
-app.get('/', (req, res) => {
-    res.render('base', {title: 'Log in system'})
-}).listen(port)
+app.get("/", (req, res) => {
+    res.render("base", { title: "Log in system" });
+  })
+  .listen(port);

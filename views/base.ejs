@@ -6,14 +6,14 @@
         <h1>
             LOG IN SYSTEM
         </h1>
-        <form action="submit">
+        <form action="/route/login" method="POST" >
             <div class="form-group">
-                <input type="text"name='username' placeholder="username">
+                <input type="email" name='email' placeholder="email">
             </div>
             <div class="form-group">
                 <input type="password"  name='password' placeholder="password">
             </div>
-            <button class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success">Submit</button>
         </form>
     </div>
 </div>
