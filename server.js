@@ -4,9 +4,9 @@ const session = require("express-session");
 const {v4: uuidv4} = require('uuid')
 const router = require('./router')
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;  //server port
 
-const app = express();
+const app = express();  //converts request body json to data
 
 //middle ware
 const bodyparser = require('body-parser');
@@ -31,9 +31,13 @@ app.use(session(
         saveUninitialized: true
     }
 ))
+
 app.use('/route', router)
+
 //home route
 app.get("/", (req, res) => {
     res.render("base", { title: "Log in system" });
   })
-  .listen(port);
+
+
+app.listen(port);
